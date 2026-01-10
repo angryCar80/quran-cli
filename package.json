@@ -1,0 +1,19 @@
+{
+  "name": "impressingts",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@types/blessed": "^0.1.27",
+    "blessed": "^0.1.81",
+    "chalk": "^5.6.2",
+    "inquirer": "^13.1.0",
+    "rtl-arabic": "^2.1.1"
+  }
+}
