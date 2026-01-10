@@ -7,12 +7,13 @@ export async function readSurah(num: number) {
 
 	const surah = json.data;
 
-	console.log(`\n${surah.englishName} (${surah.name})\n`);
-
+	let output = `\n${surah.englishName} (${surah.name})\n\n`;
 
 	for (const ayah of surah.ayahs) {
 		const arabicText = rtl(ayah.text);
-		console.log(`${ayah.numberInSurah}. ${arabicText}`);
+		output += `${ayah.numberInSurah}. ${arabicText}\n`;
 	}
+	
+	return output;
 }
 

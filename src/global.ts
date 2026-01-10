@@ -3,5 +3,5 @@ export function rtl(text: string) {
 	return text.split("").reverse().join("");
 }
 export function OtherFunction() {
-	console.log("ilove dis ");
+	console.log("I love this");
 }

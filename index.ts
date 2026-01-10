@@ -68,7 +68,8 @@ async function main() {
 			mouse: true,
 			border: { type: "line" },
 			scrollbar: { ch: " " },
-			style: { fg: "white", bg: "magenta", border: { fg: "#f0f0f0" } },
+			wrap: true,
+			style: { fg: "white", bg: "black", border: { fg: "white" } },
 		});
 
 		screen.append(box);
@@ -114,17 +115,18 @@ async function main() {
 		screen.render();
 	}
 
+
 	async function showSurah(number: number) {
 		screen.children.forEach((c) => c.destroy());
 
-		const surah: any = await readSurah(number); // assume returns string
+		let surah: any = await readSurah(number); // assume returns string
 
 		const box = blessed.box({
 			top: "center",
 			left: "center",
 			width: "80%",
 			height: "80%",
-			content: surah,
+			content: `${surah}`,
 			scrollable: true,
 			alwaysScroll: true,
 			keys: true,
@@ -132,7 +134,8 @@ async function main() {
 			mouse: true,
 			border: { type: "line" },
 			scrollbar: { ch: " " },
-			style: { fg: "white", bg: "magenta", border: { fg: "#f0f0f0" } },
+			wrap: true,
+			style: { fg: "white", bg: "black", border: { fg: "white" } }
 		});
 
 		screen.append(box);
