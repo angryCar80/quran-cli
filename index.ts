@@ -1,6 +1,6 @@
 import * as blessed from "blessed";
 import { listSurah } from "./src/surah";
-import { readSurah } from "./src/read";
+import { readSurah, readRandomSurah } from "./src/read";
 
 async function main() {
 	const screen = blessed.screen({
@@ -11,7 +11,7 @@ async function main() {
 	screen.title = "Quran CLI";
 
 	// Quit with Ctrl+C
-	screen.key(["C-c"], () => process.exit(0));
+	screen.key(["C-c", "C-q"], () => process.exit(0));
 
 	async function mainMenu() {
 		// Clear screen
@@ -22,7 +22,7 @@ async function main() {
 			left: "center",
 			width: "50%",
 			height: "50%",
-			items: ["List Surahs", "Read Surah", "Exit"],
+			items: ["List Surahs", "Read Surah", "Random", "Time Spent", "Exit"],
 			keys: true,
 			vi: true,
 			mouse: true,
@@ -45,7 +45,10 @@ async function main() {
 				await showListSurahs();
 			} else if (choice === "Read Surah") {
 				await promptSurahNumber();
-			} else if (choice === "Exit") {
+			} else if (choice == "Random") {
+				await randomSurah();
+			}
+			else if (choice === "Exit") {
 				process.exit(0);
 			}
 		});
@@ -54,7 +57,7 @@ async function main() {
 	async function showListSurahs() {
 		screen.children.forEach((c) => c.destroy());
 
-		const surahs: any = await listSurah(); // assume it returns string
+		const surahs: string = await listSurah(); // assume it returns string
 		const box = blessed.box({
 			top: "center",
 			left: "center",
@@ -67,7 +70,7 @@ async function main() {
 			vi: true,
 			mouse: true,
 			border: { type: "line" },
-			scrollbar: { ch: " " },
+			scrollbar: { ch: "|" },
 			wrap: true,
 			style: { fg: "white", bg: "black", border: { fg: "white" } },
 		});
@@ -163,11 +166,41 @@ async function main() {
 			style: { fg: "white", bg: "red", border: { fg: "#f0f0f0" } },
 		});
 
+
 		await new Promise<void>((resolve) => {
 			box.display(msg, 3, () => resolve());
 		});
 	}
 
+	async function randomSurah() {
+		const data: string = await readRandomSurah();
+		const randomPanel = blessed.box({
+			top: "center",
+			left: "center",
+			width: "80%",
+			height: "80%",
+			scrollable: true,
+			alwaysScroll: true,
+			keys: true,
+			vi: true,
+			mouse: true,
+			content: data,
+			border: { type: "line" },
+			wrap: true,
+			style: { fg: "white", bg: "black", border: { fg: "white" } },
+		});
+		screen.append(randomPanel);
+		randomPanel.focus();
+		screen.render();
+
+		// Return to menu on q or escape
+
+		await new Promise<void>((resolve) => {
+			screen.key(["q", "escape"], () => resolve());
+		});
+
+		await mainMenu();
+	}
 	// Start the menu
 	await mainMenu();
 }

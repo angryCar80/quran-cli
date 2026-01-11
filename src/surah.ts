@@ -1,8 +1,6 @@
 import { fetchJSON } from "./api";
 import { rtl } from "./global";
 
-
-
 export async function listSurah() {
 	const data: any = await fetchJSON("https://api.alquran.cloud/v1/surah");
 	process.stdout.setDefaultEncoding("utf8");
@@ -12,6 +10,6 @@ export async function listSurah() {
 		const arabicName: string = rtl(s.name);
 		output += `${s.number}. ${s.englishName} (${arabicName})\n`;
 	});
-	
+
 	return output;
 }
