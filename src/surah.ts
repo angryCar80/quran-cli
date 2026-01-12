@@ -7,8 +7,7 @@ export async function listSurah() {
 
 	let output = "";
 	data.data.forEach((s: any) => {
-		const arabicName: string = rtl(s.name);
-		output += `${s.number}. ${s.englishName} (${arabicName})\n`;
+		output += `${s.number}. ${s.englishName} (${s.name})\n`;
 	});
 
 	return output;

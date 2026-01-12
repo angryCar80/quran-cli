@@ -5,7 +5,8 @@ import { readSurah, readRandomSurah } from "./src/read";
 async function main() {
 	const screen = blessed.screen({
 		smartCSR: true,
-		fullUnicode: true, // better Arabic support
+		fullUnicode: true,
+		utf8: true, // ensure UTF-8 encoding
 	});
 
 	screen.title = "Quran CLI";

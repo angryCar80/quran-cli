@@ -10,8 +10,7 @@ export async function readSurah(num: number) {
 	let output = `\n${surah.englishName} (${surah.name})\n\n`;
 
 	for (const ayah of surah.ayahs) {
-		const arabicText = rtl(ayah.text);
-		output += `${ayah.numberInSurah}. ${arabicText}\n`;
+		output += `${ayah.numberInSurah}. ${ayah.text}\n`;
 	}
 
 	return output;
@@ -32,8 +31,7 @@ export async function readRandomSurah() {
 	let output = `\n${surah.englishName} (${surah.name})\n\n`;
 
 	for (const ayah of surah.ayahs) {
-		const arabicText = rtl(ayah.text);
-		output += `${ayah.numberInSurah}. ${arabicText}\n`;
+		output += `${ayah.numberInSurah}. ${ayah.text}\n`;
 	}
 
 	return output;

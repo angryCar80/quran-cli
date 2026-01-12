@@ -1,7 +1,7 @@
 // EVERY FUNCTION COMES HERE //
 export function rtl(text: string) {
-	return text.split("").reverse().join("");
+	// Arabic text is already in correct order from the API
+	// Just ensure UTF-8 encoding
+	return text;
 }
-export function OtherFunction() {
-	console.log("I DONT KNOW WHY I CREATED THIS FILE JUST FOR THIS FUNCTION TO USE IT GLOBALY");
-}
+
